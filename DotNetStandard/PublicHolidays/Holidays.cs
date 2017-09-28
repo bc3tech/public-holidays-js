@@ -14,8 +14,10 @@ namespace PublicHolidays
             var calendar = await Fetch.HolidaysAsync(targetUri);
 
             return calendar.Events
-                .Where(e => e.Name.IndexOf(name ?? string.Empty, StringComparison.OrdinalIgnoreCase) != -1)
-                .Select(e => new Event(e.Name, e.Start.Date));
+                .Where(e => e.Start.Date > DateTime.Today
+                    && e.Start.Date <= DateTime.Today.AddYears(1)
+                    && e.Name.IndexOf(name ?? string.Empty, StringComparison.OrdinalIgnoreCase) != -1)
+                .Select(e => new Event(e.Summary, e.Start.Date));
 
         }
     }
@@ -30,5 +32,10 @@ namespace PublicHolidays
 
         public string Name { get; }
         public DateTime Date { get; }
+
+        public override string ToString()
+        {
+            return $@"{Name}: {Date.ToShortDateString()}";
+        }
     }
 }
