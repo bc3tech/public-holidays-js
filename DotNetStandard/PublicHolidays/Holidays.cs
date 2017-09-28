@@ -16,7 +16,7 @@ namespace PublicHolidays
             return calendar.Events
                 .Where(e => e.Start.Date > DateTime.Today
                     && e.Start.Date <= DateTime.Today.AddYears(1)
-                    && e.Name.IndexOf(name ?? string.Empty, StringComparison.OrdinalIgnoreCase) != -1)
+                    && e.Summary.IndexOf(name ?? string.Empty, StringComparison.OrdinalIgnoreCase) != -1)
                 .Select(e => new Event(e.Summary, e.Start.Date));
 
         }
