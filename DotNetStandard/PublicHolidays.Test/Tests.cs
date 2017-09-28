@@ -30,5 +30,53 @@ namespace PublicHolidays.Test
 
             Assert.IsTrue(true);
         }
+
+        [TestMethod]
+        public void FetchCanadianHolidays()
+        {
+            try
+            {
+                var holidays =
+                Holidays.GetAsync(new Filter(@"ca", @"fr")).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(holidays);
+                Assert.IsTrue(holidays.Any());
+
+                foreach (var h in holidays)
+                {
+                    Console.WriteLine(h.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.ToString());
+            }
+
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GetThanksgiving()
+        {
+            try
+            {
+                var holidays =
+                Holidays.GetAsync(new Filter(), @"thanksgiving").GetAwaiter().GetResult();
+
+                Assert.IsNotNull(holidays);
+                Assert.IsTrue(holidays.Any(), @"No holidays found");
+
+                foreach (var h in holidays)
+                {
+                    Console.WriteLine(h.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.ToString());
+            }
+
+            Assert.IsTrue(true);
+        }
     }
 }
