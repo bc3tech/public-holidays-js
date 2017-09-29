@@ -61,7 +61,7 @@ namespace PublicHolidays.Test
             try
             {
                 var holidays =
-                Holidays.GetAsync(new Filter(), @"thanksgiving").GetAwaiter().GetResult();
+                Holidays.GetAsync(new Filter(name: @"thanksgiving")).GetAwaiter().GetResult();
 
                 Assert.IsNotNull(holidays);
                 Assert.IsTrue(holidays.Any(), @"No holidays found");
