@@ -34,17 +34,31 @@ namespace PublicHolidays
         }
     }
 
-    public struct Event
+    /// <summary></summary>
+    public class Event
     {
-        public Event(string name, DateTime date)
+        internal Event(string name, DateTime date)
         {
             Name = name;
             Date = date;
         }
 
+        /// <summary>
+        /// Gets the name of the Event.
+        /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Gets the start date of the Event.
+        /// </summary>
         public DateTime Date { get; }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// "{name}: {short date}"
+        /// </returns>
         public override string ToString()
         {
             return $@"{Name}: {Date.ToShortDateString()}";
